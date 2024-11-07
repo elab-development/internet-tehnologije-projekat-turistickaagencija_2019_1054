@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,5 +25,26 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    //addDeposit metoda: Ovo je metoda koja se poziva kada korisnik pristupi /home/add-deposit. Metoda vraća view home.partials.addDeposit, gde se prikazuje forma za dodavanje depozita.
+    public function addDeposit()
+    {
+        return view('home.partials.addDeposit');
+    }
+    public function updateDeposit(Request $request){
+
+        $user = Auth::user();
+
+
+        $request->validate([
+            "deposit"=>"required|max:4"
+
+        ],
+        [
+            "deposit.max"=>"Can't add more then 9999 rsd at once"
+
+        ]);
+        $user->deposit =  $user->deposit + $request->deposit;
+        return redirect(route('home'));
     }
 }
