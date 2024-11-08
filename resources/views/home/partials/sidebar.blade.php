@@ -16,6 +16,6 @@
      <!-- Link ka stranici sa porukama (trenutno prazan href atribut znači da ne vodi nigde). -->
      <a href="" class="btn btn-secondary form-control m-2">Messages</a>
      
-     <!-- Link ka stranici za kreiranje novog oglasa (trenutno prazan href atribut znači da ne vodi nigde). -->
+     <!-- Link koristi rutu home.showAddForm, što vodi korisnika na stranicu sa formom za kreiranje oglasa kada klikne na dugme "New Ad". -->
      <a href="{{route('home.showAddForm')}}" class="btn btn-primary form-control m-2">New Ad</a>
      

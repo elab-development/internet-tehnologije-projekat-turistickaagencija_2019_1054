@@ -48,6 +48,7 @@ class HomeController extends Controller
         $user->deposit =  $user->deposit + $request->deposit;
         return redirect(route('home'));
     }
+    //Metoda učitava sve kategorije iz baze koristeći Category::all() i prosleđuje ih view-u showAddForm kako bi korisnik mogao izabrati kategoriju prilikom dodavanja oglasa.
     public function showAddForm(){
         $allCategories = Category::all();
         return view('home.showAddForm',['categories'=>$allCategories]);
