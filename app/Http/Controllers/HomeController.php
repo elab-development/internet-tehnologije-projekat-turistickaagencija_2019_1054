@@ -113,4 +113,15 @@ class HomeController extends Controller
          return redirect()->route('home')->with('success', 'Ad saved successfully');
 
      }
+        public function showSingleAd($id){
+
+        // Pronalazi oglas u bazi koristeći njegov jedinstveni ID.
+        // Metoda find() vraća model oglasa sa datim ID-em ili null ako oglas ne postoji.
+        $single_ad = Ad::find($id);
+
+        // Vraća view 'home.singleAd' i prosleđuje mu pronađeni oglas kroz promenljivu 'single_ad'.
+        // Na ovaj način, view dobija pristup podacima oglasa za prikazivanje.
+        return view('home.partials.singleAd', ['single_ad' => $single_ad]);
+            
+        }
     }

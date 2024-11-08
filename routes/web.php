@@ -16,5 +16,7 @@ Route::get('/home/add-deposit', [App\Http\Controllers\HomeController::class, 'ad
 
 //Ova ruta pristupa metodi showAddForm u HomeController-u i poziva view za prikazivanje forme za dodavanje oglasa.
 Route::get('/home/show-add-form', [App\Http\Controllers\HomeController::class, 'showAddForm'])->name('home.showAddForm');
+Route::get('/home/ad{id}', [App\Http\Controllers\HomeController::class, 'showSingleAd'])->name('home.singleAd');
+
 Route::post('/home/add-deposit', [App\Http\Controllers\HomeController::class, 'updateDeposit'])->name('home.addDeposit');
 Route::post('/home/save-ad', [App\Http\Controllers\HomeController::class, 'saveAd'])->name('home.saveAd');
