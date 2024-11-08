@@ -15,7 +15,7 @@
         <!-- Druga kolona koja zauzima 8 od 12 Bootstrap kolona i sadrži formu za dodavanje depozita. -->
         <div class="col-8">
          
-            <form action=" " method="POST" enctype="multipart/form-data">
+            <form action="{{route('home.saveAd')}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <input type="text" name="title" placeholder="title" class="form-control"><br>
