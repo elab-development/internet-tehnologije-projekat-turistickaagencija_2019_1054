@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('body');
             $table->integer('price');
-            $table->string('image1');
-            $table->string('image2');
-            $table->string('image3');
+            $table->string('image1')->nullable();
+            $table->string('image2')->nullable();
+            $table->string('image3')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
             $table->timestamps();

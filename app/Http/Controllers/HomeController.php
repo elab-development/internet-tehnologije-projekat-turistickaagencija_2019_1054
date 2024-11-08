@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -47,4 +48,8 @@ class HomeController extends Controller
         $user->deposit =  $user->deposit + $request->deposit;
         return redirect(route('home'));
     }
-}
+    public function showAddForm(){
+        $allCategories = Category::all();
+        return view('home.showAddForm',['categories'=>$allCategories]);
+    }
+} 
