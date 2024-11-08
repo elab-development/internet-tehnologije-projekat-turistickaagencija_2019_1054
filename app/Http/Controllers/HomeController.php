@@ -26,7 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+      //  $all_ads = Ad::where('user_id',Auth::user()->id)->get();
+
+      $all_ads = Auth::user()->ads;
+        return view('home',['all_ads' => $all_ads]);
     }
     //addDeposit metoda: Ovo je metoda koja se poziva kada korisnik pristupi /home/add-deposit. Metoda vraća view home.partials.addDeposit, gde se prikazuje forma za dodavanje depozita.
     public function addDeposit()
