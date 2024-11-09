@@ -5,7 +5,7 @@
      <button class="btn btn-success form-control m-2">Deposit {{ Auth::check() && Auth::user()->deposit ? Auth::user()->deposit : 0 }} rsd</button>
 
      <!-- Link koji vodi ka stranici sa svim oglasima (trenutno prazan href atribut znači da ne vodi nigde). -->
-     <a href="" class="btn btn-secondary form-control m-2">All ads</a>
+     <a href="{{route('home')}}" class="btn btn-secondary form-control m-2">All ads</a>
      
      <!-- Link ka stranici za dodavanje depozita. Koristi prilagođenu rutu definisanu kao 'home.addDeposit'. -->
      
