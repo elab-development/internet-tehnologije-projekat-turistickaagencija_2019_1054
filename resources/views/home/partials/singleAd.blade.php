@@ -13,44 +13,28 @@
            <div class="row p-3">
             @if (isset($single_ad->image1))
                 <div class="col-6 offset-3">
-<<<<<<< HEAD
-
-                    <img src="/ad_images/{{$single_ad->image1}}" class="img-fluid">
-=======
                     <img id="main-image" src="/ad_images/{{$single_ad->image1}}" class="img-fluid">
->>>>>>> nova-grana
                 </div>
             @endif
                 <div class="col-6 offset-3">
                     <div class="row">
                         @if (isset($single_ad->image2))
                         <div class="col-6">
-<<<<<<< HEAD
-                      <img src="/ad_images/{{$single_ad->image2}}" class="img-fluid">
-=======
                       <img src="/ad_images/{{$single_ad->image2}}" class="thumb img-fluid">
->>>>>>> nova-grana
                         </div>
                         @endif
                         @if (isset($single_ad->image3))
                         <div class="col-6">
-<<<<<<< HEAD
-                      <img src="/ad_images/{{$single_ad->image3}}" class="img-fluid">
-=======
                       <img src="/ad_images/{{$single_ad->image3}}" class="thumb img-fluid">
->>>>>>> nova-grana
                         </div>
                         @endif
                   </div>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
 
 
 
 
->>>>>>> nova-grana
         </div>
     </div>
 </div>
