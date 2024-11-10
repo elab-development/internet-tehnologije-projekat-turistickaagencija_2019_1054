@@ -17,4 +17,11 @@ class AdController extends Controller
    
 
   }
+  public function show($id){
+
+    $single_ad = Ad::find($id);
+    
+    return view('singleAd',compact('single_ad'));
+
+}
 }

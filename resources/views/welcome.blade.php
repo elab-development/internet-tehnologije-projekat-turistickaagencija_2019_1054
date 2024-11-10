@@ -18,7 +18,7 @@
                 <ul class="list-group">
                     @foreach ($all_ads as $ad)
                         <li class="list-group-item">
-                                <a href="" >{{$ad->title}}</a>
+                            <a href="{{ route('singleAd', ['id' => $ad->id]) }}" >{{$ad->title}}</a>
                         </li>
                     @endforeach
                 </ul>
