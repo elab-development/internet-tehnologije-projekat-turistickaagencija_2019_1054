@@ -55,4 +55,9 @@ class AdController extends Controller
     return view('singleAd',compact('single_ad'));
 
 }
+    public function sendMessage(Request $request,$id){
+
+      $ad = Ad::find($id);
+      dd($ad);
+    }
 }
