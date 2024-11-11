@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Ad;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -41,7 +41,11 @@ class AdController extends Controller
   public function show($id){
 
     $single_ad = Ad::find($id);
-    
+
+    if (Auth::check() && Auth::user()->id !== $single_ad->user_ad) {
+      $single_ad->increment('views');
+  }
+   
     return view('singleAd',compact('single_ad'));
 
 }
