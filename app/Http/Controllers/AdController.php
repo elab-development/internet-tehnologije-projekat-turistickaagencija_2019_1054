@@ -6,10 +6,14 @@ use App\Models\Ad;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
+use function PHPSTORM_META\type;
+
 class AdController extends Controller
 {
   public function index()
 {
+
+    $all_ads = new Ad; 
     // Proverava da li postoji parametar 'cat' u zahtevu
     if (isset(request()->cat)) {
         // Pronalazi kategoriju koja odgovara imenu prosleđenom kroz 'cat' parametar
@@ -24,14 +28,16 @@ class AdController extends Controller
          // $query->where('name',request()->cat);
          $query->whereName(request()->cat);
 
-      })->get();
+      });
       
 
-    } else {
-        // Ako 'cat' parametar nije postavljen, dohvata sve oglase
-        $all_ads = Ad::all();
-    }
+    } 
+    if(isset(request()->type)){
+      $type = (request()->type== 'lower') ? 'asc' : 'desc';
 
+      $all_ads = $all_ads->orderBy('price',$type);
+    }
+    $all_ads = $all_ads->get();
     // Dohvata sve kategorije koje se prikazuju kao filteri ili meni u prikazu
     $categories = Category::all();
 
