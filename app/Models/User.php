@@ -51,5 +51,14 @@ class User extends Authenticatable
 
 
     }
-
+    // Metoda koja definiše vezu između korisnika i poruka koje je korisnik primio
+    public function messages(){
+        // Vezujemo model User sa modelom Message koristeći 'hasMany' vezu,
+        // što znači da jedan korisnik može imati više poruka
+        // Prvi parametar je putanja do modela Message koji je povezan sa User modelom
+        // Drugi parametar je kolona 'receiver_id' u tabeli messages koja se koristi kao strani ključ 
+        // za povezivanje poruke sa korisnikom koji je primalac
+        return $this->hasMany('App\Models\Message','receiver_id');
+        //U tvojoj migraciji 2024_11_06_130230_create_messages_table, kada se kreira tabela messages, postoji kolona receiver_id, koja je strani ključ koji povezuje poruku sa korisnikom (primaocem).
+    }
 }
