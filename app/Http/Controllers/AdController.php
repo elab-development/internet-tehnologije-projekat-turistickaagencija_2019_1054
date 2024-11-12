@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Ad;
 use App\Models\Category;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 use function PHPSTORM_META\type;
@@ -47,17 +48,43 @@ class AdController extends Controller
   public function show($id){
 
     $single_ad = Ad::find($id);
-
-    if (Auth::check() && Auth::user()->id !== $single_ad->user_ad) {
+    
+    // Provera da li je korisnik prijavljen i da li je različit od vlasnika oglasa
+    if (Auth::check() && Auth::user()->id !== $single_ad->user_id) {
       $single_ad->increment('views');
   }
-   
-    return view('singleAd',compact('single_ad'));
+   // Vraća pogled 'singleAd' sa podatkom o oglasu
+    return view('singleAd',compact('single_ad')); 
 
 }
     public function sendMessage(Request $request,$id){
+     
+    // Pronalazi oglas na osnovu ID-a iz URL-a
+    $ad = Ad::find($id);
 
-      $ad = Ad::find($id);
-      dd($ad);
+    // Dohvata korisnika koji je vlasnik oglasa
+    $ad_owner = $ad->user;
+
+    // Kreira novu instancu modela Message za slanje poruke
+    $new_msg = new Message();
+
+    // Postavlja sadržaj poruke na osnovu vrednosti unete u formu
+    $new_msg->text = $request->msg;
+
+    // Postavlja ID korisnika koji šalje poruku
+    $new_msg->sender_id = Auth::user()->id;
+
+    // Postavlja ID korisnika koji prima poruku (vlasnik oglasa)
+    $new_msg->receiver_id = $ad_owner->id;
+
+    // Povezuje poruku sa određenim oglasom pomoću ID-a oglasa
+    $new_msg->ad_id = $ad->id;
+
+    // Snima poruku u bazu podataka
+    $new_msg->save();
+
+    // Vraća korisnika na prethodnu stranicu sa porukom o uspehu
+      return redirect()->back()->with('message','Message sent');
+   
     }
 }
