@@ -14,7 +14,7 @@
      <a href="{{ route('home.addDeposit') }}" class="btn btn-secondary form-control m-2">Add deposit</a>
      
      <!-- Link ka stranici sa porukama (trenutno prazan href atribut znači da ne vodi nigde). -->
-     <a href="" class="btn btn-secondary form-control m-2">Messages</a>
+     <a href="{{route('home.showMessages')}}" class="btn btn-secondary form-control m-2">Messages</a>
      
      <!-- Link koristi rutu home.showAddForm, što vodi korisnika na stranicu sa formom za kreiranje oglasa kada klikne na dugme "New Ad". -->
      <a href="{{route('home.showAddForm')}}" class="btn btn-primary form-control m-2">New Ad</a>

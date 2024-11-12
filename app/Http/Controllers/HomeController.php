@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ad;
 use App\Models\Category;
+use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -123,5 +124,13 @@ class HomeController extends Controller
         // Na ovaj način, view dobija pristup podacima oglasa za prikazivanje.
         return view('home.partials.singleAd', ['single_ad' => $single_ad]);
             
+        }
+        public function showMessages(){
+
+            $messages = Message::where('receiver_id',Auth::user()->id)->get();
+            // dd($messages);
+
+            return view('home.messages',compact('messages'));
+
         }
     }
