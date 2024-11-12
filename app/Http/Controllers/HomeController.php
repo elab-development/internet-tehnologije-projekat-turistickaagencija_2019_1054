@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ad;
 use App\Models\Category;
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -132,5 +133,47 @@ class HomeController extends Controller
 
             return view('home.messages',compact('messages'));
 
+        }
+       // Metoda  služi za prikazivanje odgovora na poruke povezane sa određenim oglasom. 
+        public function reply(){
+            // Uzima 'sender_id' iz zahteva (URL parametar koji je prosleđen u ruti)
+            // Ovaj ID nam je potreban da bismo znali koji korisnik je poslao poruku
+            $sender_id = request()->sender_id;
+
+            // Uzima 'ad_id' iz zahteva (URL parametar koji je prosleđen u ruti)
+            // Ovaj ID nam je potreban da bismo znali koji oglas je povezan sa porukom
+            $ad_id = request()->ad_id;
+
+            // Dohvata sve poruke koje imaju isti 'sender_id' i 'ad_id' iz baze podataka
+            // Koristimo 'where' metodu za filtriranje poruka koje su poslate od strane određenog korisnika (sender_id)
+            // i koje su vezane za određeni oglas (ad_id)
+            // Ovaj upit vraća kolekciju poruka koje zadovoljavaju ove uslove
+            $messages = Message::where('sender_id', $sender_id)
+                            ->where('ad_id', $ad_id)
+                            ->get();
+
+            // Vraća view 'home.reply' i prosleđuje sledeće podatke:
+            // - 'sender_id' koji predstavlja ID pošiljaoca poruke
+            // - 'ad_id' koji predstavlja ID oglasa na koji se odgovara
+            // - 'messages' koji sadrži sve poruke koje su povezane sa određenim pošiljaocem i oglasom
+            // Funkcija 'compact' se koristi da prosledi ove varijable u view
+            return view('home.reply', compact('sender_id', 'ad_id', 'messages'));
+        }
+
+        // koristi za kreiranje nove poruke kao odgovor na prethodno primljene poruke
+        public function replyStore(Request $request){
+
+            $sender = User::find($request->sender_id);
+            $ad = Ad::find($request->ad_id);
+
+
+            $new_msg = new Message();
+            $new_msg->text = $request->msg;
+            $new_msg->sender_id  = Auth::user()->id;
+            $new_msg->receiver_id = $sender->id;
+            $new_msg->ad_id = $ad->id;
+            $new_msg->save();
+            return redirect()->route('home.showMessages')->with('message','Reply sent');
+            
         }
     }

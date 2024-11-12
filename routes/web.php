@@ -19,5 +19,8 @@ Route::get('/home/show-add-form', [App\Http\Controllers\HomeController::class, '
 Route::get('/home/ad/{id}', [App\Http\Controllers\HomeController::class, 'showSingleAd'])->name('home.singleAd');
 Route::get('/home/messages', [App\Http\Controllers\HomeController::class, 'showMessages'])->name('home.showMessages');
 
+Route::get('/home/messages/reply', [App\Http\Controllers\HomeController::class, 'reply'])->name('home.reply');
+Route::post('/home/messages/reply', [App\Http\Controllers\HomeController::class, 'replyStore'])->name('home.replyStore');
+
 Route::post('/home/add-deposit', [App\Http\Controllers\HomeController::class, 'updateDeposit'])->name('home.addDeposit');
 Route::post('/home/save-ad', [App\Http\Controllers\HomeController::class, 'saveAd'])->name('home.saveAd');

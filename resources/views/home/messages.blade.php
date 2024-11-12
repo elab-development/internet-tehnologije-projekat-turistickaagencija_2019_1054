@@ -19,7 +19,9 @@
                             <span class="float-right">{{ $message->created_at->format('d M Y') }}</span> <br>
                             <p>From: {{$message->sender->name}}</p>
                             <p><strong>{{$message->text}}</strong></p>
-                            <a href="">Reply</a>
+                            <a href="{{ route('home.reply',['sender_id'=>$message->sender->id,'ad_id'=>$message->ad_id])}}">Reply</a>
+                           
+
                         </p>
                     </li>
                 @endforeach
