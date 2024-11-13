@@ -58,7 +58,7 @@
      @if (auth()->check() && auth()->user()->id !== $single_ad->user_id)
     <div class="row mt-3">
         <div class="col-6">
-            <form action="{{ route('stripe') }}" method="POST">
+            <form action="{{ route('stripe') }}" method="GET">
                 @csrf
                 <input type="hidden" name="product_name" value="{{$single_ad->title}}">
                 <input type="hidden" name="quantity" value="1">

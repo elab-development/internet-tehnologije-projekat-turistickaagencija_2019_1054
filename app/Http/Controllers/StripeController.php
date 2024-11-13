@@ -101,7 +101,8 @@ class StripeController extends Controller
         //     'cancel_url' => 'https://example.com/cancel',
           
         // ]);
-
+/////////////////////////////////////////////////////
+/*
         $stripe = new \Stripe\StripeClient(
             'sk_test_51QKfk4P0nFXW3WcjYVTfg4vMagGOaqQEEr8lBZDdSMdGLx0Fv6et03m1IfW2Dl4qgehVBS6jwVpP43RmXWaSCxUk0086LQI0KM'
             );
@@ -119,17 +120,36 @@ class StripeController extends Controller
             ]);
             
             return redirect()->away($a->url);
-        /*
-        $stripe = new \Stripe\StripeClient('sk_test_51QKfk4P0nFXW3WcjYVTfg4vMagGOaqQEEr8lBZDdSMdGLx0Fv6et03m1IfW2Dl4qgehVBS6jwVpP43RmXWaSCxUk0086LQI0KM');
-        $customer = $stripe->customers->create([
-        'description' => 'example customer',
-         'email' => 'email@example.com',
-        'payment_method' => 'pm_card_visa',
-        ]);
-    echo $customer;
-          
-       */
-    
+            */
+       //////////////////////////////////////////
+       $stripe = new \Stripe\StripeClient('sk_test_51QKfk4P0nFXW3WcjYVTfg4vMagGOaqQEEr8lBZDdSMdGLx0Fv6et03m1IfW2Dl4qgehVBS6jwVpP43RmXWaSCxUk0086LQI0KM');
+       
+       $productName = $request->input('product_name');
+       $quantity = $request->input('quantity');
+       $price = $request->input('price') * 100; //
+       $a = $stripe->checkout->sessions->create([
+         'line_items' => [
+           [
+             'price_data' => [
+               'currency' => 'usd',
+               'product_data' => ['name' => $productName],
+               'unit_amount' =>$price,
+               'tax_behavior' => 'exclusive',
+             ],
+             'adjustable_quantity' => [
+               'enabled' => true,
+               'minimum' => 1,
+               'maximum' => 10,
+             ],
+             'quantity' => $quantity,
+           ],
+         ],
+         //'automatic_tax' => ['enabled' => true],
+         'mode' => 'payment',
+         'success_url' => 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
+        // 'cancel_url' => 'https://example.com/cancel',
+       ]);
+       return redirect()->away($a->url);
     }
     
 }
