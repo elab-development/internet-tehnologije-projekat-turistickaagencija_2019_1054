@@ -146,10 +146,16 @@ class StripeController extends Controller
          ],
          //'automatic_tax' => ['enabled' => true],
          'mode' => 'payment',
-         'success_url' => 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
+        // 'success_url' => 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
+         'success_url' => route('payment.success', ['session_id' => '{CHECKOUT_SESSION_ID}']),
+
         // 'cancel_url' => 'https://example.com/cancel',
        ]);
        return redirect()->away($a->url);
     }
-    
+    public function success(Request $request)
+{
+    // Ovdje možete obraditi logiku uspešnog plaćanja
+    return view('payment.success'); // Prikazuje stranicu sa uspešnim plaćanjem
+}
 }

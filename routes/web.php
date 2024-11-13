@@ -30,7 +30,8 @@ Route::post('/home/save-ad', [App\Http\Controllers\HomeController::class, 'saveA
 
 
 Route::get('stripe', [App\Http\Controllers\StripeController::class, 'stripe'])->name('stripe');
-Route::get('success', [StripeController::class, 'success'])->name('payment.success');
+//Route::get('success', [StripeController::class, 'success'])->name('payment.success');
+Route::get('payment/success', [StripeController::class, 'success'])->name('payment.success');
 Route::get('cancel', [StripeController::class, 'cancel'])->name('payment.cancel');
 
 
