@@ -54,6 +54,20 @@
         </div>
      </div>  
      @endif
-    
+ 
+     @if (auth()->check() && auth()->user()->id !== $single_ad->user_id)
+    <div class="row mt-3">
+        <div class="col-6">
+            <form action="{{ route('stripe') }}" method="POST">
+                @csrf
+                <input type="hidden" name="product_name" value="{{$single_ad->title}}">
+                <input type="hidden" name="quantity" value="1">
+                <input type="hidden" name="price" value="{{ $single_ad->price }}"> 
+                <button type="submit">Pay with Stripe</button>
+            </form>
+        </div>
+    </div>
+    @endif
+
 @endsection
 

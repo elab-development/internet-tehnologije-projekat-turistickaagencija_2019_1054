@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
@@ -24,3 +26,11 @@ Route::post('/home/messages/reply', [App\Http\Controllers\HomeController::class,
 
 Route::post('/home/add-deposit', [App\Http\Controllers\HomeController::class, 'updateDeposit'])->name('home.addDeposit');
 Route::post('/home/save-ad', [App\Http\Controllers\HomeController::class, 'saveAd'])->name('home.saveAd');
+
+
+
+Route::post('stripe', [App\Http\Controllers\StripeController::class, 'stripe'])->name('stripe');
+Route::get('success', [StripeController::class, 'success'])->name('payment.success');
+Route::get('cancel', [StripeController::class, 'cancel'])->name('payment.cancel');
+
+
