@@ -32,7 +32,7 @@ class HomeController extends Controller
       //  $all_ads = Ad::where('user_id',Auth::user()->id)->get();
 
       $all_ads = Auth::user()->ads;
-        return view('home',['all_ads' => $all_ads]);
+        return view('home',['all_ads' => $all_ads, 'role' => Auth::user()->role]);
     }
     //addDeposit metoda: Ovo je metoda koja se poziva kada korisnik pristupi /home/add-deposit. Metoda vraća view home.partials.addDeposit, gde se prikazuje forma za dodavanje depozita.
     public function addDeposit()
@@ -57,6 +57,9 @@ class HomeController extends Controller
     }
     //Metoda učitava sve kategorije iz baze koristeći Category::all() i prosleđuje ih view-u showAddForm kako bi korisnik mogao izabrati kategoriju prilikom dodavanja oglasa.
     public function showAddForm(){
+        ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
         $allCategories = Category::all();
         return view('home.showAddForm',['categories'=>$allCategories]);
     }

@@ -11,7 +11,12 @@
             {{-- Prva kolona širine 4 (od 12), koristi se za prikaz bočne trake --}}
             @include('home.partials.sidebar')
             {{-- Uključuje sidebar fajl sa dodatnim navigacionim opcijama ili linkovima --}}
+            @if ($role != 'user')
+            <a href="{{route('admin.admin')}}" class="btn btn-secondary form-control m-2">Admin</a>
+            @endif
         </div>
+       
+      
         
         <div class="col-8">
             {{-- Druga kolona širine 8, sadrži listu oglasa korisnika --}}
