@@ -128,5 +128,13 @@ class AdminController extends Controller
         // Preusmeri na stranicu sa svim oglasima
         return redirect()->route('admin.admin')->with('success', 'Oglas uspešno ažuriran!');
             }
+        public function destroy($id)
+        {
+            $ad = Ad::findOrFail($id);  // Pronađi oglas sa određenim ID-jem
+            $ad->delete();  // Obriši oglas
+
+            // Preusmeri na stranicu sa svim oglasima sa porukom o uspešnom brisanju
+            return redirect()->route('admin.admin')->with('success', 'Oglas uspešno obrisan!');
+        }
 
 }

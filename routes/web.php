@@ -38,6 +38,8 @@ Route::get('cancel', [StripeController::class, 'cancel'])->name('payment.cancel'
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.admin');
 Route::get('/admin/edit/{id}', [App\Http\Controllers\AdminController::class, 'edit'])->name('admin.edit');
 Route::put('/admin/edit/{id}', [App\Http\Controllers\AdminController::class, 'update'])->name('admin.update');
+Route::delete('/admin/delete/{id}', [App\Http\Controllers\AdminController::class, 'destroy'])->name('admin.delete');
+
 
 
 

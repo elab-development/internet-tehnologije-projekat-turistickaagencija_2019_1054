@@ -2,6 +2,11 @@
 
 @section('main')
     <h1>All ads</h1>
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <!-- Dodaj ovde kod za prikazivanje oglasa -->
         <div class="row">
             <div class="col-3 bg-secondary">
@@ -44,12 +49,20 @@
                             <div>
                                 <span class="badge bg-warning text-dark me-2">Pregleda {{ $ad->views }}</span>
                                 <span class="badge bg-primary text-light">{{ $ad->price }} rsd</span>
-                                <a href="{{ route('admin.edit', ['id' => $ad->id]) }}">Edit</a>
+                               {{-- <a href="{{ route('admin.edit', ['id' => $ad->id]) }}">Edit</a> --}}
+                               <button onclick="location.href='{{ route('admin.edit', ['id' => $ad->id]) }}'" class="btn btn-primary btn-sm">Edit</button>
+
+                                <form action="{{ route('admin.delete', ['id' => $ad->id]) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Da li ste sigurni da želite obrisati ovaj oglas?');">Delete</button>
+                                </form>
+                                
                             </div>
                         </li>
                     @endforeach
                 </ul>
             </div>
         </div>
-
+       
 @endsection
