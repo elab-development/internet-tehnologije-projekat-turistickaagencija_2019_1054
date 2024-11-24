@@ -1,66 +1,86 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# C2C E-Trgovina
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+C2C E-Trgovina je aplikacija koja omogućava korisnicima da postavljaju i pregledaju oglase, komuniciraju sa vlasnicima oglasa, upravljaju svojim depozitima, i vrše plaćanja putem integracije sa Stripe-om. Aplikacija koristi Laravel kao backend i omogućava pristup svim funkcijama korisnicima sa različitim nivoima privilegija.
 
-## About Laravel
+## Funkcionalnosti
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Korisnički deo:**
+  - Pregled svih oglasa sa mogućnostima filtriranja po kategorijama i sortiranja po ceni.
+  - Pregled detalja oglasa sa opcijom slanja poruke vlasniku oglasa.
+  - Dodavanje novih oglasa sa nazivom, opisom, cenom, kategorijom i slikama.
+  - Upravljanje depozitima uz mogućnost dodavanja depozita do 9999 RSD.
+  - Pregled i odgovaranje na poruke.
+  - Plaćanje putem Stripe integracije za korisnike koji žele da izvrše transakcije.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Admin deo:**
+  - Pregled i upravljanje svim oglasima.
+  
 
-## Learning Laravel
+## Tehnologije
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Backend**: Laravel 11.x
+- **Frontend**: HTML, CSS (Bootstrap), SCSS
+- **Baza podataka**: MySQL
+- **Stripe integracija** za plaćanja
+- **Autentifikacija**: Laravel Auth
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Instalacija i pokretanje na lokalnoj mašini
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Pratite sledeće korake da biste postavili i pokrenuli projekat na lokalnoj mašini:
 
-## Laravel Sponsors
+### 1. Kloniranje repozitorijuma
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Prvo klonirajte repozitorijum na vaš računar:
 
-### Premium Partners
+```bash
+git clone https://github.com/elab-development/internet-tehnologije-projekat-turistickaagencija_2019_1054
+2. Instalacija zavisnosti
+Pređite u direktorijum sa projektom i instalirajte zavisnosti putem Composer:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+bash
+Copy code
+cd c2c_e_trgovina
+composer install
+3. Postavljanje env fajla
+Kopirajte .env.example u novi fajl nazvan .env:
 
-## Contributing
+bash
+Copy code
+cp .env.example .env
+Zatim, u .env fajlu postavite odgovarajuće vrednosti za vašu bazu podataka i druge parametre (npr. Stripe API ključ, mail konfiguracija itd.).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Kreiranje baze podataka
+Kreirajte bazu podataka i pokrenite migracije:
 
-## Code of Conduct
+bash
+Copy code
+php artisan migrate
+Ako želite da napunite bazu podataka početnim podacima, možete pokrenuti seeders:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+bash
+Copy code
+php artisan db:seed
+5. Generisanje aplikacijskog ključa
+Pokrenite sledeću komandu da biste generisali aplikacijski ključ:
 
-## Security Vulnerabilities
+bash
+Copy code
+php artisan key:generate
+6. Pokretanje lokalnog servera
+Pokrenite lokalni server koristeći Artisan komandu:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+bash
+Copy code
+php artisan serve
+Server će biti dostupan na http://localhost:8000.
 
-## License
+7. Stripe API konfiguracija
+Ako želite da testirate Stripe plaćanja, obavezno dodajte svoj Stripe API ključ u .env fajl:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+plaintext
+Copy code
+STRIPE_KEY=vaš_stripe_publishable_key
+STRIPE_SECRET=vaš_stripe_secret_key
+8. Login i registracija
+Na početnoj stranici možete pronaći opcije za prijavu i registraciju korisnika. Ukoliko nemate nalog, registrujte se sa osnovnim podacima (ime, email, lozinka).
